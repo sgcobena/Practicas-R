@@ -1,0 +1,503 @@
+---
+title: "1_pra_rstudio_vectores_matrics"
+author: "Marco R."
+date: "06/10/2019"
+output: 
+  html_document: 
+    fig_caption: yes
+    highlight: haddock
+    number_sections: yes
+    theme: cosmo
+    toc: yes
+---
+
+1. Introducir los vectores (1 2 3 4 5) y (6 7 8 9 10) asignándoles las variables u y v respectivamente: 
+
+a. Determinar 3u, u+v, u-v. 
+b. Construir un vector cuyos elementos sean los de v incrementados 3 unidades. 
+c. Determinar un vector de elementos el resultado de multiplicar cada elemento de u por el correspondiente de v. 
+d. Calcular un vector de elementos los de u elevados al cubo. 
+e. Calcular un vector cuyos elementos sean el resultado de elevar cada elemento de u al elemento de v correspondiente. 
+
+
+```{r}
+u <- c(1, 2, 3, 4, 5)
+v <-  c(6, 7, 8, 9, 10)
+# a. Determinar 3u, u+v, u-v. 
+
+3*u
+u+v
+u-v
+
+```
+
+```{r}
+# b. Construir un vector cuyos elementos sean los de v incrementados 3 unidades.
+
+nuevo_vector = v+3
+```
+
+```{r}
+# c. Determinar un vector de elementos el resultado de multiplicar cada elemento de u por el correspondiente de v. 
+
+nuevo_vector2 = u*v
+```
+
+
+```{r}
+# d. Calcular un vector de elementos los de u elevados al cubo.
+
+vector_cubo <- u**3
+```
+
+```{r}
+# e. Calcular un vector cuyos elementos sean el resultado de elevar cada elemento de u al elemento de v correspondiente. 
+
+vector_elevado <- u**v
+```
+
+
+2. Introducir las matrices 
+
+\documentclass{article}
+\usepackage{amsmath}
+\begin{document}
+\[
+A=\begin{bmatrix}
+    {1} & {2} & {1} \\
+    {5} & {4} & {3} \\
+    {7} & {1} & {0}
+\end{bmatrix}
+, B =
+\begin{bmatrix}
+    {-2}& {5} & {7} \\
+    {4} & {3} & {1} \\
+    {8} & {-1} & {3}
+\end{bmatrix}
+\]
+\end{document}
+
+
+
+a. Calcular A+B, AB, \[ A^4 \] 
+b. Determinar una matriz cuyos elementos sean el resultado de multiplicar cada elemento de A por el correspondiente de B. 
+c. Determinar una matriz cuyos elementos sean el resultado de dividir cada elemento de A por el correspondiente de B. 
+
+```{r}
+v1 <- c(1, 2, 1)
+v2 <- c(5, 4, 3)
+v3 <- c(7, 1, 0)
+A <- rbind(v1, v2, v3)
+b1 <- c(-2, 5, 7)
+b2 <- c(4, 3, 1)
+b3 <- c(8, -1, 3)
+B <- rbind(b1, b2, b3)
+print(B)
+# a. Calcular A+B, AB, \[ A^4 \]
+A+B
+AB <- cbind(A, B)
+print(AB)
+A4 <- A^4
+print(A4)
+```
+
+```{r}
+# b. Determinar una matriz cuyos elementos sean el resultado de multiplicar cada elemento de A por el correspondiente de B. 
+nueva_matriz <- A*B
+print(A)
+print(B)
+print(nueva_matriz)
+
+```
+
+```{r}
+# c. Determinar una matriz cuyos elementos sean el resultado de dividir cada elemento de A por el correspondiente de B.
+
+matriz_division <- A/B
+print(matriz_division)
+```
+
+
+
+3. Determinar si es posible: 
+
+a. La inversa de A y de B. Verificar que el producto de una matriz por su inversa es la matriz identidad. 
+b. La traza de B. 
+c. El determinante y el rango de A.  
+
+Pista: ayuda en inglés...
+
+```{r}
+# a. La inversa de A y de B. Verificar que el producto de una matriz por su inversa es la matriz identidad. 
+help("matrix")
+inversa_a <- solve(A)
+#print(A)
+#print(inversa_a)
+print(A*inversa_a)
+
+
+
+
+```
+
+
+```{r}
+# b. La traza de B. 
+traza <- sum(diag(B))
+print(B)
+print(traza)
+```
+
+
+```{r}
+# c. El determinante y el rango de A. 
+determinante <- det(A)
+```
+
+
+4. Una empresa compra los siguientes artículos: 
+
+|Referencia artículo | Cantidad de artículo | Precio de la unidad (sin IVA) |
+|----------------------------------------------------------------------------
+|100 |200 |190 |101 |
+|150 |345 |102 |500 |
+|69  |103 |49  |598 |
+
+
+a. Introducir la tabla en mediante tres vectores: referencia, cantidad y coste. 
+b. Determinar el coste total de cada producto. 
+c. Construir una tabla con cada artículo y su coste total. 
+d. Calcular el coste total a pagar por la empresa incluyendo un 21% de IVA 
+
+
+```{r}
+# a. Introducir la tabla en mediante tres vectores: referencia, cantidad y coste.
+
+referencia <- c(100, 200, 190, 101)
+cantidad <- c(150, 345, 102, 500)
+coste <- c(69, 103, 49, 598)
+matriz1 <- rbind(referencia, cantidad, coste)
+print(matriz1)
+colnames("Referencia artículo", "Cantidad de artículo", "Precio de la unidad (sin IVA)")
+
+```
+
+```{r}
+# Respuesta b
+```
+
+
+```{r}
+# Respuesta c
+```
+
+
+```{r}
+# Respuesta d
+```
+
+
+5. Introducir los vectores u=(2,3,4) y v=(3,-4,8). 
+a. Determinar la suma y el producto de todos los elementos de u. 
+b. Calcular el máximo y mínimo de los elementos de v, así como el lugar donde están situados. 
+c. Calcular el producto escalar de u y v. 
+d. Determinar el módulo de los vectores.
+
+```{r}
+# Respuesta a Determinar la suma y el producto de todos los elementos de u. 
+u <- c(2,3,4)
+v <- c(3,-4,8)
+suma_u <- sum(u)
+producto_u <- prod(u) 
+```
+
+
+```{r}
+# Respuesta b.Calcular el máximo y mínimo de los elementos de v, así como el lugar donde están situados.
+minimo <- which.min(u)
+maximo <- which.max(u)
+print(minimo)
+print(maximo)
+print(u[minimo])
+print(u[maximo])
+
+
+```
+
+
+```{r}
+# Respuesta c. Calcular el producto escalar de u y v.
+producto_escalar <- u %*% v
+print(producto_escalar)
+```
+
+
+```{r}
+# Respuesta d. Determinar el módulo de los vectores.
+modulo_u <- sqrt(u[1]**2+u[2]**2+u[3]**2)
+modulo_u
+```
+
+6. Construir los vectores cuyos elementos sean: 
+
+a. Los números naturales comprendidos entre el 10 y el 100. 
+b. (-1, -0,8, -0.6,............, 1.6, 1.8, 2). 
+ 112
+c. Desde el 1 hasta el 3 igualmente espaciados y con un total de 38 elementos
+
+
+```{r}
+#Respuesta a. Los números naturales comprendidos entre el 10 y el 100.
+v_naturales <- seq(10, 100, 1)
+v_naturales
+
+```
+
+```{r}
+# Respuesta b. (-1, -0,8, -0.6,............, 1.6, 1.8, 2). 
+vector_1 <- seq(-1, 2, 0.2)
+vector_1
+length(vector_1)
+```
+
+```{r}
+# Respuesta c. Desde el 1 hasta el 3 igualmente espaciados y con un total de 38 elementos
+vector_2 <- seq(1, 3, length.out = 38)
+vector_2
+length(vector_2)
+```
+
+
+
+7. Dados u=(1,2,3), v=(4,5,6)
+
+a. Construir el vector (0,1,2,3) a partir de u. 
+b. Construir el vector de elementos los de u y v 
+
+```{r}
+# Respuesta a. Construir el vector (0,1,2,3) a partir de u.
+u = c(1,2,3)
+v = c(4,5,6)
+c(0,u)
+```
+
+```{r}
+# Respuesta b. Construir el vector de elementos los de u y v 
+c(u,v)
+```
+
+
+8. Construir un vector w con los cuadrados de los 15 primeros números naturales. 
+
+a. Extraer el cuadrado de 7. 
+b. Extraer los cuadrados de los elementos que van desde el 2 al 6 ambos inclusive. 
+c. Extraer los cuadrados de los elementos que van desde el 7 al 13 ambos inclusive en sentido inverso 
+d. Construir, a partir de w un vector con los cuadrados de 1, 3, 7,14.
+
+
+```{r}
+# 8. Construir un vector w con los cuadrados de los 15 primeros números naturales. a. Extraer el cuadrado de 7. 
+w <- seq(1,15)**2
+w[7]
+```
+
+
+```{r}
+# b. Extraer los cuadrados de los elementos que van desde el 2 al 6 ambos inclusive.
+w[2:6]
+```
+
+
+```{r}
+# Respuesta c Extraer los cuadrados de los elementos que van desde el 7 al 13 ambos inclusive en sentido inverso 
+w[13:7]
+```
+
+```{r}
+# Respuesta d Construir, a partir de w un vector con los cuadrados de 1, 3, 7,14.
+nuevo <- c(w[1],w[3],w[7],w[14])
+nuevo
+```
+
+
+9. Consider a vector:
+x <- c(4,6,5,7,10,9,4,15)
+
+What is the value of:
+c(4,6,5,7,10,9,4,15) < 7
+
+a. TRUE, FALSE, TRUE, FALSE, FALSE, FALSE, TRUE, FALSE
+b. TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, TRUE, FALSE
+c. FALSE, TRUE, TRUE, FALSE, FALSE, FALSE, TRUE, FALSE
+d. TRUE, TRUE, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE
+e. TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, TRUE, FALSE
+
+
+```{r}
+# Respuesta b. TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, TRUE, FALSE
+
+```
+
+
+10. If
+z <- 0:9
+then what is the output from the following R-statements:
+
+digits <- as.character(z)
+as.integer(digits)
+
+a. Error in subset. object 'z' not found
+b. 0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+c. "NA", "NA", "NA", "NA", "NA", "NA", "NA", "NA", "NA"
+d. "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"
+e. 0, 0, 0, 0, 0, 0, 0, 0, 0
+
+```{r}
+# Respuesta b. 0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+z <- 0:9
+
+digits <- as.character(z)
+digits
+as.integer(digits)
+```
+
+
+
+11. Consider the vector:
+x <- c(1,2,3,4)
+
+What is the value of k for:
+(x+2)[(!is.na(x)) & x > 0] -> k
+
+a. 1, 2, 3, 4
+b. 1, 4, 9, 16
+c. Error: object 'k' not found
+d. 3, 4, 5, 6
+e. numeric(0)
+
+
+```{r}
+# Respuesta
+x <- c(1,2,3,4)
+
+
+(x+2)[(!is.na(x)) & x > 0] -> k
+k
+```
+
+
+12. Opcional (Dataframe)
+Consider the AirPassenger data set
+data(AirPassengers)
+
+Which statement will produce the following output?
+##  [1] 112 118 132 129 121 135 148 148 136 119 104 118
+
+a. AirPassengers[time(AirPassengers) >= 1949 & time(AirPassengers) < 1950, 12]
+b. AirPassengers[AirPassengers >= 1949 & AirPassengers < 1950]
+c. AirPassengers[time(AirPassengers) >= 1949 & time(AirPassengers) < 1950]
+d. AirPassengers[AirPassengers >= 1949 & AirPassengers < 1950, 12]
+e. c[[1]]
+
+```{r}
+# Respuesta
+data("AirPassengers")
+```
+
+
+
+13. If
+x <- c(2, 4, 6, 8)
+and
+y <- c(TRUE, TRUE, FALSE, TRUE)
+
+What is the value of:
+sum(x[y])
+
+a. 20
+b. 8
+c. 14
+d. NA
+
+```{r}
+# Respuesta c. 14
+```
+
+
+
+
+14. Consider the vector:
+x <- c(34, 56, 55, 87, NA, 4, 77, NA, 21, NA, 39)
+Which R-statement will count the number of NA values in x?
+a. count(is.na(X))
+b. length(is.na(x))
+c. sum(is.na(x))
+d. count(!is.na(x))
+e. sum(!is.na(x))
+
+```{r}
+# Respuesta
+x <- c(34, 56, 55, 87, NA, 4, 77, NA, 21, NA, 39)
+sum(is.na(x))
+```
+
+
+15. If:
+Age <- c(22, 25, 18, 20)
+Name <- c("James", "Mathew", "Olivia", "Stella")
+Gender <- c("M", "M", "F", "F")
+then what is the R-code for getting the following output;
+##   Age   Name Gender
+## 1  22  James      M
+## 2  25 Mathew      M
+
+a.
+DataFrame = data.frame(c(Age), c(Name), c(Gender))
+subset(DataFrame, Gender == "M")
+
+b.
+DataFrame = data.frame(c(Age),c(Name),c(Gender))
+subset(Gender=="M"), eval=FALSE 
+
+c.
+DataFrame = data.frame(Age,Name,Gender)
+subset(DataFrame,Gender=="M")
+
+d.
+DataFrame = data.frame(c(Age,Name,Gender))
+subset(DataFrame,Gender=="M")
+
+```{r}
+# Respuesta
+Age <- c(22, 25, 18, 20)
+Name <- c("James", "Mathew", "Olivia", "Stella")
+Gender <- c("M", "M", "F", "F")
+DataFrame = data.frame(c(Age), c(Name), c(Gender))
+subset(DataFrame, Gender == "M")
+DataFrame
+```
+
+
+
+16. Consider two vectors:
+p <- c (3, 5, 6, 8)
+and
+q <- c (3, 3, 3)
+What is the value of:
+
+p+q
+a. 6, 8, 6, 8
+b. 6, 8, 0, 0
+c. 6, 8, NA, NA
+d. 3, 5, 6, 8 Warning message: In p+q : longer object length is not a multiple of shorter object length
+e. 6, 8, 9, 11
+
+```{r}
+# Respuesta. e. 6, 8, 9, 11
+p <- c (3, 5, 6, 8)
+q <- c (3, 3, 3)
+p+q
+```
+
+
+
