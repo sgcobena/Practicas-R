@@ -1,0 +1,248 @@
+---
+title: "2_pra_rstudio_dataframes"
+description: "Practicamos con los dataframes"
+author: "Marco R. - NEOLAND"
+date: "21/10/2019"
+output: 
+  html_document: 
+    fig_caption: yes
+    highlight: haddock
+    number_sections: yes
+    theme: cosmo
+    toc: yes
+---
+
+
+1. Creamos un dataframe
+
+```{r}
+emp_id = c (1:5) 
+emp_name = c("Rick","Dan","Michelle","Ryan","Gary")
+salary = c(623.3,515.2,611.0,729.0,843.25)
+start_date = as.Date(c("2012-01-01", "2013-09-23", "2014-11-15", "2014-05-11","2015-03-27"))
+df <- data.frame(emp_id,emp_name,salary,start_date)
+
+# employees =
+
+```
+
+
+2. Observaremos su estructura
+
+```{r}
+head(df)
+```
+
+
+3. Realizamos un resumen de los datos estadísticos
+
+```{r}
+summary(df)
+```
+
+
+
+4. Extraemos los dos primeros resultados
+
+```{r}
+head(df,2)
+```
+
+
+* * *
+
+
+5. Cargamos el dataset iris y la guardamos en una nueva variable
+
+```{r}
+df_iris <- datasets::iris
+```
+
+
+6. Realizaremos los mismos puntos describiendo el total de filas y columnas, así como el total de observaciones.
+
+```{r}
+filas <- nrow(df_iris)
+columnas <- ncol(df_iris)
+```
+
+
+7. Extraeremos solo los valores de "virginica"
+
+```{r}
+library(dplyr)
+df_iris_virginica <- df_iris %>% 
+  filter(Species=="virginica")
+df_iris_virginica
+```
+
+
+8. Repetimos para "versicolor", solo el ancho y largo del pétalo
+
+```{r}
+df_iris_versicolor <- df_iris %>% 
+  filter(Species=="versicolor") %>% 
+  select(Petal.Length,Petal.Width)
+df_iris_versicolor
+```
+
+
+9. Extraemos solo las observaciones de las filas 10 hasta la 20, del pétalo y sépalo de la specie "setosa"
+
+```{r}
+df_iris_setosa <- df_iris %>% 
+  filter(Species=="setosa") 
+df_iris_setosa2 <- df_iris_setosa[10:20,]
+df_iris_setosa2
+```
+
+
+
+10. Extraemos solo los observaciones de la especie "virginica" donde el pétalo sea más largo de 3 y el ancho mayor de 1.50
+
+```{r}
+df_virgi <- df_iris %>% 
+  filter(Species=="virginica" & Petal.Length > 3 & Petal.Width > 1.5)
+df_virgi
+```
+
+
+11. Extraemos solo los observaciones todas las especies donde el pétalo sea más largo de 6.0 y el ancho mayor de 2.0
+
+```{r}
+df_todos <- df_iris %>% 
+  filter(Petal.Length > 6.0 & Petal.Width > 2.0)
+df_todos
+```
+
+
+
+12. 11. Extraemos solo los observaciones todas las especies donde el sépalo sea menor de largo de 4.0 y el ancho mayor de 3.0
+
+```{r}
+df_todos2 <- df_iris %>% 
+  filter(Sepal.Length < 4.0 & Sepal.Width > 3.0)
+df_todos2
+```
+
+
+* * * 
+
+Cansado de las flores?
+
+13. Cargamos el dataset desde la carpeta que vimos en aula el fichero movies.xls , cada hoja del fichero en una variable
+
+```{r}
+# Para importar un fichero podemos utilizar de momento, el botón del cuadrante environment (import dataset) y fichero excel
+
+
+
+install.packages("readxl")
+library(readxl)
+df_1990 <- read_xls('movies.xls', sheet = "1900s")
+df_2000 <- read_xls("movies.xls", sheet = "2000s")
+df_2010 <- read_xls("movies.xls", sheet = "2010s")
+```
+
+
+14. Podemos realizar un pequeño exploratorio de este dataset? Si tenemos varias hojas deberíamos realizar por cada una de ellas
+
+```{r}
+# Exploracion de la primera pestaña 1990s
+dim(df_1990)
+summary(df_1990)
+# Exploracion de la segunda pestaña 2000s
+dim(df_2000)
+summary(df_2000)
+# Exploracion de la tercera pestaña 2010s
+dim(df_2010)
+summary(df_2010)
+```
+
+
+15. Seleccionaremos del fichero 2010, solo las películas realizadas en Alemania con duración superior a 150
+
+```{r}
+library(dplyr)
+alemania_150 <- df_2010 %>%
+  filter(Country == 'Germany', Duration > 150)
+alemania_150
+```
+
+
+16. Ahora realizaremos un filtro solo para las peliculas del 2000, realizadas en España
+
+```{r}
+spain <- df_2000 %>%
+  filter(Country == 'Spain')
+spain
+```
+
+
+17. Cuántas películas existen en movie_1900 que superan las 3 horas?
+
+```{r}
+mas_3_horas <- df_1990 %>%
+  count(Duration > 3)
+mas_3_horas
+```
+
+
+
+18. Cuántas películas existen en movie_2000 que su score ha sido menor que 5 ? Enúmeralo por país.
+
+```{r}
+menor_5_USA <- df_2000 %>%
+  count(Country == 'USA' & `IMDB Score` < 5)
+menor_5_USA
+
+menor_5_UK <- df_2000 %>%
+  count(Country == 'UK' & `IMDB Score` < 5)
+menor_5_UK
+
+menor_5_Spain <- df_2000 %>%
+  count(Country == 'Spain' & `IMDB Score` < 5)
+menor_5_Spain
+```
+
+
+19. En los tres ficheros, puedes observar únicamente los paises presentes?
+
+```{r}
+paises_1990 <- df_1990 %>%
+  select(Country) %>%
+  arrange(desc(Country))
+paises_1990
+
+paises_2000 <- df_2000 %>%
+  select(Country) %>%
+  arrange(desc(Country))
+paises_2000
+
+paises_2010 <- df_2010 %>%
+  select(Country) %>%
+  arrange(desc(Country))
+paises_2010
+```
+
+
+20. Y podemos realizar cuántas películas hay por páis en 1900, 2000, 2010 ?
+
+```{r}
+peliculas_USA <- df_2000 %>%
+  count(Country == 'USA')
+peliculas_USA
+
+peliculas_UK <- df_2000 %>%
+  count(Country == 'UK')
+peliculas_UK
+
+peliculas_Spain <- df_2000 %>%
+  count(Country == 'Spain')
+peliculas_Spain
+
+```
+
+
+
+
